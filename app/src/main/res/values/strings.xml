@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Fiber Detective System</string>
+    <string name="server_ip_address">Server IP Address</string>
+    <string name="enter_server_ip_address">Enter Server IP Address</string>
+    <string name="user_s_name">User\'s Name</string>
+    <string name="enter_user_s_name">Enter User\'s Name</string>
+    <string name="user_s_password">User\'s Password</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="welcome_to_fiber_detective_system">Welcome to Fiber Detective System</string>
+    <string name="version_name">Version Name</string>
+</resources>
