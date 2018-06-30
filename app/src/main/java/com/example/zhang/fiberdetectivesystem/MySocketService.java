@@ -8,7 +8,14 @@ import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.IBinder;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MySocketService extends Service {
+
+    MyTimerTask myTimerTask = null;
+    Timer myTimer = null;
+
     public MySocketService() {
     }
 
@@ -26,6 +33,11 @@ public class MySocketService extends Service {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("com.example.zhang.fiberdetectivesystem.MySocketBroadcastReceiver");
         registerReceiver(mySocketServiceBroadcastReceiver,intentFilter);
+
+        //activate a timer myTimerTask period is 20s
+        myTimerTask = new MyTimerTask();
+        myTimer = new Timer();
+        myTimer.schedule(myTimerTask,1000,10000);
 
         return super.onStartCommand(intent, flags, startId);
     }
@@ -53,6 +65,16 @@ public class MySocketService extends Service {
                     sendBroadcast(intent1);
                 }
             },3000);/**/
+        }
+    }
+
+    public class MyTimerTask extends TimerTask{
+        @Override
+        public void run() {
+            //send a broadcast to DisplayActivity
+            Intent intent1 = new Intent();
+            intent1.setAction("com.example.zhang.fiberdetectivesystem.MyDisplayActivityBroadcastReceiver");
+            sendBroadcast(intent1);
         }
     }
 

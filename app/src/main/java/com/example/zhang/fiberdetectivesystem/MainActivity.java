@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -20,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ConstraintLayout constraintLayoutLogin = findViewById(R.id.constraintLayoutLogin);
+        
         //dynamic register filter
         MyMainActivityBroadcastReceiver myMainActivityBroadcastReceiver = new MyMainActivityBroadcastReceiver();
         IntentFilter intentFilter = new IntentFilter();
@@ -42,6 +46,15 @@ public class MainActivity extends AppCompatActivity {
 
         Button buttonCancel = (Button) findViewById(R.id.buttonCancel);
         Button buttonConfirm = (Button) findViewById(R.id.buttonConfirm);
+
+        //Confirm Button onClick to DisplayActivity
+        buttonConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,DisplayActivity.class);
+                startActivity(intent);
+            }
+        });
 
         /*//send a broadcast
         Intent intent1 = new Intent();
