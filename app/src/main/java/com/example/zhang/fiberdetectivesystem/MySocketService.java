@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.IBinder;
 
+import java.net.Socket;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -37,7 +38,9 @@ public class MySocketService extends Service {
         //activate a timer myTimerTask period is 20s
         myTimerTask = new MyTimerTask();
         myTimer = new Timer();
-        myTimer.schedule(myTimerTask,1000,10000);
+        myTimer.schedule(myTimerTask,1000,500);
+
+        Socket socket = new Socket();
 
         return super.onStartCommand(intent, flags, startId);
     }
@@ -65,6 +68,13 @@ public class MySocketService extends Service {
                     sendBroadcast(intent1);
                 }
             },3000);/**/
+
+            //receive the value from SplashActivity broadcast send
+            String serverIP = intent.getStringExtra("serverIP");
+            String userName = intent.getStringExtra("userName");
+            String passWord = intent.getStringExtra("passWord");
+
+
         }
     }
 
@@ -73,6 +83,8 @@ public class MySocketService extends Service {
         public void run() {
             //send a broadcast to DisplayActivity
             Intent intent1 = new Intent();
+            intent1.putExtra("String1","Display Succeed");
+            intent1.putExtra("String2","Display failed");
             intent1.setAction("com.example.zhang.fiberdetectivesystem.MyDisplayActivityBroadcastReceiver");
             sendBroadcast(intent1);
         }
